@@ -5,17 +5,22 @@ class Program
     {
         Console.Write("Give word: ");
         string word = Console.ReadLine();
-        string wordBackwards = "";
-        
-        // Go through each character in provided word backwards and insert them
-        // to wordBackwards-variable.
-        for (int i = word.Length - 1; i >= 0; i--)
+
+        // Boolean to store word status.
+        bool isPalindrome = true;
+
+        // Lets compare letters from start and end towards middle as long as
+        // they equal. If they dont equal set palindrome status to false and
+        // break.
+        for (int i = 0; i < word.Length - 1 - i; i++)
         {
-            wordBackwards += word[i];
+            if (word[i] != word[word.Length - 1 - i])
+            {
+                isPalindrome = false;
+                break;
+            }
         }
-        
-        // If word and wordBackwards are same then the word is palindrome.
-        if (word == wordBackwards)
+        if (isPalindrome)
         {
             Console.WriteLine("Word is palindrome");
         }
