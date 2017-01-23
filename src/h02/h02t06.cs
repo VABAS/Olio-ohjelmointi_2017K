@@ -20,6 +20,8 @@ class Program
                 break;
             }
         }
+        
+        // Tell user if word was palindrome or not.
         if (isPalindrome)
         {
             Console.WriteLine("Word is palindrome");
