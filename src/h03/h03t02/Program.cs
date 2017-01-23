@@ -1,17 +1,17 @@
 using System;
-namespace Pesukone
+namespace H03T02
 {
     class Program
     {
-        static void main ()
+        static void Main ()
         {
             Pesukone pesukone = new Pesukone();
             pesukone.lockHatch();
-            pesukone.waterAmount = 20;
-            pesukone.rpm = 9;
+            pesukone.WaterAmount = 20;
+            pesukone.Rpm = 9;
             pesukone.openHatch();
-            pesukone.waterAmount = 0;
-            pesukone.rpm = 0;
+            pesukone.WaterAmount = 0;
+            pesukone.Rpm = 0;
             pesukone.openHatch();
         }
     }
