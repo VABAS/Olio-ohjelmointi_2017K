@@ -1,13 +1,14 @@
 using System;
-namespace Kiuas
+namespace H03T01
 {
     class Program
     {
-        static void main ()
+        static void Main ()
         {
             Kiuas kiuas = new Kiuas();
             kiuas.Temperature = 90;
             kiuas.Humidity = 60;
+            kiuas.toggle();
             kiuas.toggle();
         }
     }

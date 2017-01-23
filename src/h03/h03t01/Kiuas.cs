@@ -1,5 +1,5 @@
 using System;
-namespace Kiuas
+namespace H03T01
 {
     class Kiuas
     {
@@ -15,9 +15,9 @@ namespace Kiuas
         }
         public int Humidity {
             get { return humidity;}
-            set { himidity = value;}
+            set { humidity = value;}
         }
-        public bool isOn {
+        public bool IsOn {
             get { return isOn; }
         }
 
@@ -25,10 +25,12 @@ namespace Kiuas
         public void toggle () {
             if (isOn)
             {
+                Console.WriteLine("Toggled kiuas to off");
                 this.isOn = false;
             }
             else
             {
+                Console.WriteLine("Toggled kiuas to on");
                 this.isOn = true;
             }
         }
