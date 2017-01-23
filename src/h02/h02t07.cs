@@ -5,7 +5,6 @@ class Program
     {
         string word = "ohjelmointi";
         char[] guesses = new char[0];
-        int numGuesses = 0;
         while (true)
         {
             int numUnderScores = 0;
@@ -45,7 +44,7 @@ class Program
                                    " times.");
                 break;
             }
-            else if (numGuesses >= 20)
+            else if (guesses.Length >= 20)
             {
                 Console.WriteLine("You have guessed too many times. You lost");
                 Console.WriteLine("Right answer was " + word);
@@ -76,28 +75,26 @@ class Program
             }
             else
             {
-                bool allreadyGuessed = false;
+                bool alreadyGuessed = false;
                 
-                // Checking if character has been guessed allready and if so do
+                // Checking if character has been guessed already and if so do
                 // not count that as guess. Also inform user about situation.
                 foreach (char guessCharacter in guesses)
                 {
                     if (guess[0] == guessCharacter)
                     {
-                        allreadyGuessed = true;
+                        alreadyGuessed = true;
                         break;
                     }
                 }
-                if (!allreadyGuessed)
+                if (!alreadyGuessed)
                 {
                     Array.Resize(ref guesses, guesses.Length + 1);
                     guesses[guesses.Length - 1] = guess[0];
-                    // Incrementing numGuesses.
-                    numGuesses++;
                 }
                 else
                 {
-                    Console.WriteLine("You have allready guessed that character!");
+                    Console.WriteLine("You have already guessed that character!");
                 }
             }
         }
