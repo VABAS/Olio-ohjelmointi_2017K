@@ -1,5 +1,5 @@
 using System;
-class Kiuas
+class Pesukone
 {
     // Class member variables.
     int waterAmount = 0;
@@ -78,5 +78,25 @@ class Kiuas
           return false;
         }
     }
+}
 
+class Program
+{
+    static void main ()
+    {
+        Pesukone pesukone = new Pesukone();
+        pesukone.lockHatch();
+        pesukone.waterAmount = 20;
+        pesukone.rpm = 9;
+        if (!pesukone.openHatch())
+        {
+            Console.WriteLine("Could not open hatch!")
+        }
+        pesukone.waterAmount = 0;
+        pesukone.rpm = 0;
+        if (pesukone.openHatch())
+        {
+            Console.WriteLine("Hatch opened succesfully!")
+        }
+    }
 }
