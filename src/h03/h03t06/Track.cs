@@ -37,6 +37,8 @@ namespace H03T06
             int minutes = length / 60;
             int seconds = length - minutes * 60;
             string zero = "";
+            // Adding zero in front of seconds if they are below 10 (one
+            // digit) for nice display
             if (seconds < 10)
             {
                 zero = "0";
