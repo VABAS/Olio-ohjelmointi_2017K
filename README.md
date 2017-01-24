@@ -22,3 +22,11 @@
 * [Tehtävä 5](src/h02/h02t05.cs)
 * [Tehtävä 6](src/h02/h02t06.cs)
 * [Tehtävä 7](src/h02/h02t07.cs)
+
+## Harjoitukset 3
+* [Tehtävä 1](src/h03/h03t01/)
+* [Tehtävä 2](src/h03/h03t02/)
+* [Tehtävä 3](src/h03/h03t03/)
+* [Tehtävä 4](src/h03/h03t04/)
+* [Tehtävä 5](src/h03/h03t05/)
+* [Tehtävä 6](src/h03/h03t06/)
