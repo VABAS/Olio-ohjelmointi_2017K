@@ -8,8 +8,8 @@ namespace H03T06
         private string name;
         private string genre;
         private double price;
-        private string[] songs;
-        
+        private Track[] songs;
+
         // Properties
         public string Artist {
             get { return artist; }
@@ -27,9 +27,9 @@ namespace H03T06
             get { return price; }
             set { price = value; }
         }
-        
+
         // Constructor.
-        public CD (string artist, string name, string genre, double price, string[] songs)
+        public CD (string artist, string name, string genre, double price, Track[] songs)
         {
             Artist = artist;
             Name = name;
@@ -37,17 +37,17 @@ namespace H03T06
             Price = price;
             this.songs = songs;
         }
-        
+
         // Methods.
         public string getDetails ()
         {
             string strOfSongs = "";
             for (int i = 0; i < songs.Length; i++)
             {
-                strOfSongs +=  " --- " + songs[i] + "\n";
+                strOfSongs +=  " --- " + songs[i].getDetails() + "\n";
             }
             return "CD:\n" +
-                   "-Artist: " + Artist + 
+                   "-Artist: " + Artist +
                    "\n-Name: " + Name +
                    "\n-Genre: " + Genre +
                    "\n-Price: " + Price +
