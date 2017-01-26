@@ -23,6 +23,7 @@ namespace H03T06
             Title = title;
             Length = length;
         }
+        
         // Second counctructor. Takes track title and lenth in minutes and
         // seconds separately as parameter.
         public Track (string title, int lengthMin, int lenthSec)
@@ -34,8 +35,12 @@ namespace H03T06
         // Methods.
         public string getDetails ()
         {
+             // Separating minutes and seconds from each other.
             int minutes = length / 60;
             int seconds = length - minutes * 60;
+            
+            // Adding zero in front of seconds if they are below 10 (one
+            // digit) for nice display.
             string zero = "";
             // Adding zero in front of seconds if they are below 10 (one
             // digit) for nice display.
@@ -43,6 +48,8 @@ namespace H03T06
             {
                 zero = "0";
             }
+            
+            // Finally returning all information as one line.
             return "Name: " + title + " - " + minutes + ":" + zero + seconds;
         }
     }

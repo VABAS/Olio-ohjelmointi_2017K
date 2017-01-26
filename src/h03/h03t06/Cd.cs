@@ -1,7 +1,7 @@
 using System;
 namespace H03T06
 {
-    class CD
+    class Cd
     {
         // Member variables.
         private string artist;
@@ -29,7 +29,7 @@ namespace H03T06
         }
 
         // Constructor.
-        public CD (string artist, string name, string genre, double price, Track[] songs)
+        public Cd (string artist, string name, string genre, double price, Track[] songs)
         {
             Artist = artist;
             Name = name;
@@ -41,17 +41,18 @@ namespace H03T06
         // Methods.
         public string getDetails ()
         {
+            // Fetching songs and comining them into one string.
             string strOfSongs = "";
             for (int i = 0; i < songs.Length; i++)
             {
                 strOfSongs +=  " --- " + songs[i].getDetails() + "\n";
             }
             return "CD:\n" +
-                   "-Artist: " + Artist +
-                   "\n-Name: " + Name +
-                   "\n-Genre: " + Genre +
-                   "\n-Price: " + Price +
-                   "\n-Songs:\n" + strOfSongs;
+                   "-Artist: " + Artist + "\n" +
+                   "-Name: " + Name + "\n" +
+                   "-Genre: " + Genre + "\n" +
+                   "-Price: " + Price.ToString("n2") + "\n" +
+                   "-Songs:\n" + strOfSongs;
         }
     }
 }

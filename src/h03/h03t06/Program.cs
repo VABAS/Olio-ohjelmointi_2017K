@@ -5,6 +5,8 @@ namespace H03T06
     {
         static void Main ()
         {
+            // Tracks with length in minutes and seconds. (Using first
+            // constructor)
             Track[] songs = new Track[] {
                 new Track("Shudder Before the Beautiful", 6, 29),
                 new Track("Weak Fantasy", 5, 23),
@@ -18,6 +20,9 @@ namespace H03T06
                 new Track("The Eyes of Sharbat Gula", 6, 3),
                 new Track("The Greatest Show on Earth", 24, 0)
             };
+            
+            // Creating another tracks with length in seconds. (Using second
+            // contructor)
             Track[] songs2 = new Track[] {
                 new Track("Kaksi sisarta", 259),
                 new Track("Mikan faijan BMW", 254),
@@ -30,8 +35,8 @@ namespace H03T06
                 new Track("Nummela", 329)
             };
 
-            CD cd1 = new CD("Nightwish", "Endless Forms Most Beautiful", "Symphonic metal", 1.11, songs);
-            CD cd2 = new CD("Anssi Kela", "Nummela", "pop", 1.11, songs2);
+            Cd cd1 = new Cd("Nightwish", "Endless Forms Most Beautiful", "Symphonic metal", 6.2, songs);
+            Cd cd2 = new Cd("Anssi Kela", "Nummela", "pop", 5.9, songs2);
 
             Console.WriteLine(cd1.getDetails());
             Console.WriteLine(cd2.getDetails());
