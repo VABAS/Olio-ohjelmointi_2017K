@@ -39,13 +39,13 @@ namespace H03T06
         }
 
         // Methods.
-        public string getDetails ()
+        public override string ToString ()
         {
             // Fetching songs and comining them into one string.
             string strOfSongs = "";
             for (int i = 0; i < songs.Length; i++)
             {
-                strOfSongs +=  " --- " + songs[i].getDetails() + "\n";
+                strOfSongs +=  " --- " + songs[i].ToString() + "\n";
             }
             return "CD:\n" +
                    "-Artist: " + Artist + "\n" +

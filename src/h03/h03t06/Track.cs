@@ -33,7 +33,7 @@ namespace H03T06
         }
 
         // Methods.
-        public string getDetails ()
+        public override string ToString ()
         {
              // Separating minutes and seconds from each other.
             int minutes = length / 60;

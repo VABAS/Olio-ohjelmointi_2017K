@@ -38,8 +38,8 @@ namespace H03T06
             Cd cd1 = new Cd("Nightwish", "Endless Forms Most Beautiful", "Symphonic metal", 6.2, songs);
             Cd cd2 = new Cd("Anssi Kela", "Nummela", "pop", 5.9, songs2);
 
-            Console.WriteLine(cd1.getDetails());
-            Console.WriteLine(cd2.getDetails());
+            Console.WriteLine(cd1.ToString());
+            Console.WriteLine(cd2.ToString());
         }
     }
 }
