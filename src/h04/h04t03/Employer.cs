@@ -26,6 +26,7 @@ namespace H04T03
             this.salary = salary;
         }
         
+        // Overriding ToString() to generate nice summary with it.
         public override string ToString ()
         {
             return "Employee:\n" +

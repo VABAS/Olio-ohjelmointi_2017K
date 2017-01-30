@@ -20,6 +20,7 @@ namespace H04T03
             this.bonus = bonus;
         }
         
+        // Overriding ToString() to generate nice summary with it.
         public override string ToString ()
         {
             return "Boss:\n" +
