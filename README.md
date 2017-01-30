@@ -30,3 +30,11 @@
 * [Tehtävä 4](src/h03/h03t04/)
 * [Tehtävä 5](src/h03/h03t05/)
 * [Tehtävä 6](src/h03/h03t06/)
+
+## Harjoitukset 4
+* [Tehtävä 1](src/h04/h04t01/)
+* [Tehtävä 2](src/h04/h04t02/)
+* [Tehtävä 3](src/h04/h04t03/)
+* [Tehtävä 4](src/h04/h04t04/)
+* [Tehtävä 5](src/h04/h04t05/)
+* [Tehtävä 6](src/h04/h04t06/)
