@@ -14,10 +14,7 @@ namespace H04T04
         
         public override string ToString ()
         {
-            return " - Name: " + name +
-                   " Model: " + model +
-                   " ModelYear: " + modelYear +
-                   " Color: " + color +
+            return base.ToString() +
                    " SeatCount: " + seatCount +
                    " BoatType: " + boatType;
         }
