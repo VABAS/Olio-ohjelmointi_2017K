@@ -23,10 +23,7 @@ namespace H04T03
         // Overriding ToString() to generate nice summary with it.
         public override string ToString ()
         {
-            return "Boss:\n" +
-                   " - Name: " + Name +
-                   " Profession: " + Profession +
-                   " Salary: " + Salary +
+            return base.ToString() +
                    " Car: " + Car +
                    " Bonus: " + Bonus;
         }
