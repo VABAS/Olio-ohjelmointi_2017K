@@ -12,7 +12,7 @@ namespace H05T03
             while (true)
             {
                 int selection = -1;
-                Console.Write("1. Palkkaa. 2. Erota. 3. Listaa 0. Lopeta: ");
+                Console.Write("1. Hire. 2. Fire. 3. List 0. Quit: ");
                 bool status = int.TryParse(Console.ReadLine(), out selection);
                 if (status)
                 {
