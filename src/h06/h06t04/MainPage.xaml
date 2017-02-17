@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="H06T04.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:H06T04"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Image x:Name="image" HorizontalAlignment="Left" Height="303" Margin="10,10,0,0" VerticalAlignment="Top" Width="593" Source="Assets/window.png" Stretch="None"/>
+        <TextBlock x:Name="widthLabel" HorizontalAlignment="Left" Margin="608,10,0,0" TextWrapping="Wrap" Text="Ikkunan leveys (L):" VerticalAlignment="Top"/>
+        <TextBox x:Name="widthTextBox" HorizontalAlignment="Left" Margin="826,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150"/>
+        <TextBox x:Name="heightTextBox" HorizontalAlignment="Left" Margin="826,71,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150"/>
+        <TextBlock x:Name="heightLabel" HorizontalAlignment="Left" Margin="608,71,0,0" TextWrapping="Wrap" Text="Ikkunan korkeus(H):" VerticalAlignment="Top"/>
+        <TextBox x:Name="frameWidthTextBox" HorizontalAlignment="Left" Margin="826,128,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150"/>
+        <TextBlock x:Name="frameWidthLabel" HorizontalAlignment="Left" Margin="608,128,0,0" TextWrapping="Wrap" Text="Karmipuun leveys (W):" VerticalAlignment="Top"/>
+        <Button x:Name="calculateButton" Content="Laske" HorizontalAlignment="Left" Margin="826,197,0,0" VerticalAlignment="Top" Click="doCalculation"/>
+        <TextBox x:Name="windowAreaTextBox" HorizontalAlignment="Left" Margin="826,257,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150" IsReadOnly="True"/>
+        <TextBlock x:Name="windowAreaLabel" HorizontalAlignment="Left" Margin="608,257,0,0" TextWrapping="Wrap" Text="Ikkunan pinta-ala:" VerticalAlignment="Top"/>
+        <TextBox x:Name="windowClassAreaTextBox" HorizontalAlignment="Left" Margin="826,310,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150" IsReadOnly="True"/>
+        <TextBlock x:Name="windowClassAreaLabel" HorizontalAlignment="Left" Margin="608,310,0,0" TextWrapping="Wrap" Text="Lasin pinta-ala:" VerticalAlignment="Top"/>
+        <TextBox x:Name="framePerimeterLengthTextBox" HorizontalAlignment="Left" Margin="826,361,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150" IsReadOnly="True"/>
+        <TextBlock x:Name="framePermimeterLengthLabel" HorizontalAlignment="Left" Margin="608,361,0,0" TextWrapping="Wrap" Text="Karmin piiri" VerticalAlignment="Top"/>
+
+    </Grid>
+</Page>
