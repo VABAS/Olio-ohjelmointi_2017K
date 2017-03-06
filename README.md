@@ -43,3 +43,12 @@
 * [Tehtävä 1](src/h05/h05t01/)
 * [Tehtävä 2](src/h05/h05t02/)
 * [Tehtävä 3](src/h05/h05t03/)
+
+## Harjoitukset 6
+* [Tehtävä 1](src/h06/h06t01/)
+* [Tehtävä 1](src/h06/h06t02/)
+* [Tehtävä 1](src/h06/h06t03/)
+* [Tehtävä 1](src/h06/h06t04/)
+
+## Harjoitukset 7
+* [Tehtävä 1](src/h07/h07t01/)
