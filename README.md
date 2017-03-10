@@ -46,9 +46,15 @@
 
 ## Harjoitukset 6
 * [Tehtävä 1](src/h06/h06t01/)
-* [Tehtävä 1](src/h06/h06t02/)
-* [Tehtävä 1](src/h06/h06t03/)
-* [Tehtävä 1](src/h06/h06t04/)
+* [Tehtävä 2](src/h06/h06t02/)
+* [Tehtävä 3](src/h06/h06t03/)
+* [Tehtävä 4](src/h06/h06t04/)
 
 ## Harjoitukset 7
 * [Tehtävä 1](src/h07/h07t01/)
+
+## Harjoitukset 8
+* [Tehtävä 1](src/h08/h08t01/)
+* [Tehtävä 2](src/h08/h08t02/)
+* [Tehtävä 3](src/h08/h08t03/)
+* [Tehtävä 4](src/h08/h08t04/)

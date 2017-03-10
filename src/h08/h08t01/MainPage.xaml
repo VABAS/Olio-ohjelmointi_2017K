@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="H08T01.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:H08T01"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Text="1st column 1st row" TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" />
+        <TextBox Text="1st column 2nd row" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" />
+        <TextBox Text="1st column 3rd row" TextWrapping="Wrap" Grid.Column="0" Grid.Row="2" />
+        <TextBox Text="2nd column 1st row" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" />
+        <TextBox Text="2nd column 2nd row" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" />
+        <TextBox Text="2nd column 3rd row" TextWrapping="Wrap" Grid.Column="1" Grid.Row="2" />
+    </Grid>
+</Page>
