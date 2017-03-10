@@ -454,66 +454,6 @@ namespace KeyRegisterApp
         }
 
         /// <summary>
-        /// Gets the loan by key identifier. Returns null if no active loans for specified keyIdentifier
-        /// could be found.
-        /// </summary>
-        /// <returns>The loan by key identifier.</returns>
-        /// <param name="keyIdentifier">Key identifier.</param>
-        /*public override Loan getActiveLoanByKeyIdentifier (string keyIdentifier)
-        {
-            Loan loan = null;
-            IEnumerator ienum = root.GetEnumerator ();
-            XmlNode currentLoan;
-            while (ienum.MoveNext()) {
-                currentLoan = (XmlNode)ienum.Current;
-                if (currentLoan.Name != "loan")
-                {
-                    continue;
-                }
-                int keyId = int.Parse (currentLoan["keyId"].InnerText);
-                bool returned = Boolean.Parse (currentLoan.Attributes.GetNamedItem ("returned").InnerText);
-                if (getKeyById(keyId).Identifier == keyIdentifier &&
-                    !returned)
-                {
-                    string dateEnd = null;
-                    if (currentLoan["dateEnd"].InnerText != "")
-                    {
-                        dateEnd = currentLoan ["dateEnd"].InnerText;
-                    }
-                    loan = new Loan(keyId,
-                                    currentLoan["dateStart"].InnerText,
-                                    dateEnd,
-                                    currentLoan["loanedTo"].InnerText,
-                                    returned,
-                                    currentLoan["additionalInformation"].InnerText);
-                    break;
-                }
-            }
-            return loan;
-        }*/
-        
-        /*public override int getActiveLoanIdByKeyIdentifier (string keyIdentifier)
-        {
-            IEnumerator ienum = root.GetEnumerator ();
-            XmlNode currentLoan;
-            while (ienum.MoveNext()) {
-                currentLoan = (XmlNode)ienum.Current;
-                if (currentLoan.Name != "loan")
-                {
-                    continue;
-                }
-                int keyId = int.Parse (currentLoan["keyId"].InnerText);
-                bool returned = Boolean.Parse (currentLoan.Attributes.GetNamedItem ("returned").InnerText);
-                if (getKeyById(keyId).Identifier == keyIdentifier &&
-                    !returned)
-                {
-                    return int.Parse (currentLoan.Attributes.GetNamedItem ("id").InnerText);
-                }
-            }
-            return -1;
-        }*/
-
-        /// <summary>
         /// Gets all loans from register and returns them as array of <see cref="Loan"/>-objects. 
         /// </summary>
         /// <returns>All loans as array of <see cref="Loan"/>-objects.</returns>
@@ -607,16 +547,6 @@ namespace KeyRegisterApp
             }
         }
 
-        /*public override void modifyActiveLoanByKeyIdentifier (string keyIdentifier,
-                                                              string dateStart,
-                                                              string dateEnd,
-                                                              string loanedTo,
-                                                              string additional)
-        {
-            int loanId = getActiveLoanIdByKeyIdentifier (keyIdentifier);
-            modifyLoanById (loanId, dateStart, dateEnd, loanedTo, additional);
-        }*/
-
         /// <summary>
         /// Sets the loan returned. Throws <see cref="LoanIdNotFoundException"/> if loan with specified
         /// id could not be found.
@@ -635,25 +565,9 @@ namespace KeyRegisterApp
             }
         }
 
-        /*public override void setLoanReturnedByKeyId (int keyId)
-        {
-            IEnumerator ienum = root.GetEnumerator ();
-            XmlNode loan;
-            while (ienum.MoveNext()) {
-                loan = (XmlNode)ienum.Current;
-                if (loan.Name != "loan")
-                {
-                    continue;
-                }
-                if (int.Parse(loan["keyId"].InnerText) == keyId)
-                {
-                    loan.Attributes.GetNamedItem("returned").InnerText = "true";
-                    writeToFile ();
-                    return;
-                }
-            }
-            throw new LoanWithKeyIdNotFoundException("Loan with keyId " + keyId + " not found.");
-        }*/
+        ///////////////////////////////////////////////////////////////
+        /// Private methods, only in use at this XML-implementation ///
+        ///////////////////////////////////////////////////////////////
 
         /// <summary>
         /// Gets the biggest loan id in keyregister. Key with such id may or may not

@@ -7,9 +7,9 @@ namespace KeyRegisterApp
     {
         private KeyView keyView;
         private LoanView loanView;
+        private SettingsView settingsView;
         private KeyRegister keyRegister;
         private MainTabbedView noteBook;
-        //private Fixed container;
         private HBox container;
 
         private KeyViewMenu keyViewMenu;
@@ -43,37 +43,39 @@ namespace KeyRegisterApp
             keyViewMenu.addLoan.Clicked += addLoanToKeyClicked;
             keyViewMenu.showDetails.Clicked += showKeyDetailsClicked;
             keyViewMenu.toggleMissing.Clicked += toggleMissingClicked;
-            //container.Put (keyViewMenu, 0, 0);
             container.PackStart (keyViewMenu, true, true, 5);
             keyViewMenu.Halign = Align.Start;
             keyViewMenu.Valign = Align.Start;
             keyViewMenu.MarginTop = 50;
-            //keyViewMenu.SizeAllocated += menuPlacement;
 
             loanViewMenu = new LoanViewMenu ();
             loanViewMenu.addNewLoan.Clicked += addNewLoanClicked;
             loanViewMenu.editSelectedLoan.Clicked += editSelectedLoanClicked;
             loanViewMenu.returnSelectedLoan.Clicked += returnSelectedLoanClicked;
-            //container.Put (loanViewMenu, 0, 0);
             loanViewMenu.Halign = Align.Start;
             loanViewMenu.Valign = Align.Start;
             loanViewMenu.MarginTop = 50;
             container.PackStart (loanViewMenu, true, true, 5);
-            //loanViewMenu.SizeAllocated += menuPlacement;
 
             // Adding tabbed view.
             noteBook = new MainTabbedView ();
 
-            //container.Put (noteBook, 300, 0);
             container.PackStart (noteBook, true, true, 5);
 
+            // Adding keyView tab.
             keyView = new KeyView (keyRegister);
             noteBook.Add (keyView);
             noteBook.SetTabLabelText (keyView, "Key listing");
 
+            // Adding loanView tab.
             loanView = new LoanView (keyRegister);
             noteBook.Add (loanView);
             noteBook.SetTabLabelText (loanView, "Loan listing");
+
+            // Adding settings tab.
+            settingsView = new SettingsView ();
+            noteBook.Add (settingsView);
+            noteBook.SetTabLabelText (settingsView, "Settings");
 
             // Updating tables.
             doUpdates ();
@@ -86,12 +88,6 @@ namespace KeyRegisterApp
 
             noteBook.SwitchPage += setMenuPage;
         }
-
-        /*private void menuPlacement (object o, EventArgs e)
-        {
-            Widget w = (Widget)o;
-            //container.Move (w, 300 - 10 - w.AllocatedWidth, 65);
-        }*/
 
         private void hideAllMenus()
         {
@@ -112,6 +108,9 @@ namespace KeyRegisterApp
                 break;
             case 1:
                 loanViewMenu.Show ();
+                break;
+            case 2:
+                // Settings page has no menu.
                 break;
             default:
                 throw new NotImplementedException ("No menu for page #" + noteBook.CurrentPage);
@@ -180,8 +179,17 @@ namespace KeyRegisterApp
         /// </summary>
         protected void editKeyClicked (object o, EventArgs e)
         {
-            //Key key = keyRegister.getKeyByIdentifier (keyView.SelectedKeyIdentifier);
-            Key key = keyRegister.getKeyById (keyView.SelectedDbId);
+            Key key;
+
+            // If getKeyById throws KeyIdNotFoundException nothing is selected.
+            try
+            {
+                key = keyRegister.getKeyById (keyView.SelectedDbId);
+            }
+            catch (KeyRegister.KeyIdNotFoundException)
+            {
+                return;
+            }
             Window editKeyWindow = new EditKeyWindow (keyRegister, "Edit key", key);
             editKeyWindow.Destroyed += editKeyWindowDestroyed;
         }
@@ -191,9 +199,18 @@ namespace KeyRegisterApp
         /// </summary>
         protected void removeKeyClicked (object o, EventArgs e)
         {
-            //int dbId = keyRegister.getKeyIdByIdentifier (keyView.SelectedKeyIdentifier);
             int dbId = keyView.SelectedDbId;
-            Key key = keyRegister.getKeyById (dbId);
+            Key key;
+
+            // If getKeyById throws KeyIdNotFoundException nothing is selected.
+            try
+            {
+                key = keyRegister.getKeyById (dbId);
+            }
+            catch (KeyRegister.KeyIdNotFoundException)
+            {
+                return;
+            }
             bool doRemove = showConfirmationDialog ("Do you really want to delete key with identifier '" +
                                                     key.Identifier + "'?");
             if (doRemove)
@@ -205,7 +222,15 @@ namespace KeyRegisterApp
 
         protected void showKeyDetailsClicked (object o, EventArgs e)
         {
-            Window keyDetailsWindow = new KeyDetailsWindow (keyRegister, keyView.SelectedDbId);
+            Window keyDetailsWindow;
+            try
+            {
+                keyDetailsWindow = new KeyDetailsWindow (keyRegister, keyView.SelectedDbId);
+            }
+            catch (KeyRegister.KeyIdNotFoundException)
+            {
+                return;
+            }
             keyDetailsWindow.Destroyed += showKeyDetailsWindowDestroyed;
         }
 
@@ -215,20 +240,35 @@ namespace KeyRegisterApp
         protected void toggleMissingClicked (object o, EventArgs e)
         {
             int keyId = keyView.SelectedDbId;
-            if (keyRegister.getKeyById(keyId).IsMissing)
+            try
             {
-                keyRegister.setKeyToNotMissingById (keyId);
+                if (keyRegister.getKeyById(keyId).IsMissing)
+                {
+                    keyRegister.setKeyToNotMissingById (keyId);
+                }
+                else
+                {
+                    keyRegister.setKeyToMissingById (keyId);
+                }
             }
-            else
+            catch (KeyRegister.KeyIdNotFoundException)
             {
-                keyRegister.setKeyToMissingById (keyId);
+                return;
             }
             doUpdates ();
         }
 
         protected void addLoanToKeyClicked (object o, EventArgs e)
         {
-            Window newLoanToKeyWindow = new NewLoanToKeyWindow (keyRegister, keyView.SelectedDbId);
+            Window newLoanToKeyWindow;
+            try
+            {
+                newLoanToKeyWindow = new NewLoanToKeyWindow (keyRegister, keyView.SelectedDbId);
+            }
+            catch (KeyRegister.KeyIdNotFoundException)
+            {
+                return;
+            }
             newLoanToKeyWindow.Destroyed += newLoanWindowDestroyed;
         }
 
@@ -240,13 +280,28 @@ namespace KeyRegisterApp
 
         protected void editSelectedLoanClicked (object o, EventArgs e)
         {
-            Window editLoanWindow = new EditLoanWindow (keyRegister, loanView.SelectedDbId);
+            Window editLoanWindow;
+            try
+            {
+                editLoanWindow = new EditLoanWindow (keyRegister, loanView.SelectedDbId);
+            }
+            catch (KeyRegister.LoanIdNotFoundException)
+            {
+                return;
+            }
             editLoanWindow.Destroyed += editLoanWindowDestroyed;
         }
 
         protected void returnSelectedLoanClicked (object o, EventArgs e)
         {
+            try
+            {
             keyRegister.setLoanReturned (loanView.SelectedDbId);
+            }
+            catch (KeyRegister.LoanIdNotFoundException)
+            {
+                return;
+            }
             doUpdates ();
         }
 

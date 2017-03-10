@@ -144,15 +144,6 @@ namespace KeyRegisterApp
         public abstract Loan getActiveLoanByKeyId (int keyId);
 
         /// <summary>
-        /// Gets the loan by key identifier.
-        /// </summary>
-        /// <returns>The loan by key identifier.</returns>
-        /// <param name="keyIdentifier">Key identifier.</param>
-        //public abstract Loan getActiveLoanByKeyIdentifier (string keyIdentifier);
-
-        //public abstract int getActiveLoanIdByKeyIdentifier (string keyIdentifier);
-
-        /// <summary>
         /// Gets all loans from register and returns them as array of <see cref="Loan"/>-objects. 
         /// </summary>
         /// <returns>All loans as array of <see cref="Loan"/>-objects.</returns>
@@ -185,12 +176,6 @@ namespace KeyRegisterApp
                                              string dateEnd,
                                              string loanedTo,
                                              string additional);
-
-        /*public abstract void modifyActiveLoanByKeyIdentifier (string keyIdentifier,
-                                                              string dateStart,
-                                                              string dateEnd,
-                                                              string loanedTo,
-                                                              string additional);*/
 
         /// <summary>
         /// Adds the loan that represents the given object to register. Keys loan status should be checked at overriding implementation.
@@ -239,8 +224,6 @@ namespace KeyRegisterApp
         /// <param name="id">Id of the loan to set returned.</param>
         /// <exception cref="LoanIdNotFoundException">Trows LoanIdNotFoundException if loan with specified id cannot be found.</exception>
         public abstract void setLoanReturned (int id);
-        
-        //public abstract void setLoanReturnedByKeyId (int keyId);
 
         // Exception classes.
         public class LoanIdNotFoundException : System.Exception

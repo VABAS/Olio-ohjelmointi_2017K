@@ -7,19 +7,15 @@ namespace KeyRegisterApp
     {
         protected ListStore listStore;
         protected TreeView tree;
-        //protected string selectedKeyIdentifier;
         protected int keyIdColumnIndex;
         protected int selectedDbId;
 
         protected KeyRegister keyRegister;
 
-        //public string SelectedKeyIdentifier {
-        //    get { return selectedKeyIdentifier; }
-        //}
-
         public int SelectedDbId {
             get { return selectedDbId; }
         }
+
         public OwnScrolledTreeView (KeyRegister kr)
         {
             keyRegister = kr;
@@ -44,7 +40,6 @@ namespace KeyRegisterApp
             TreeIter iter;
 
             if(selection.GetSelected(out model, out iter)){
-                //selectedKeyIdentifier = model.GetValue (iter, 1).ToString ();
                 selectedDbId = int.Parse(model.GetValue (iter, 0).ToString());
             }
         }
