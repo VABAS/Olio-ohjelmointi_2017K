@@ -23,10 +23,15 @@ namespace T08H04
     public sealed partial class MainPage : Page
     {
         private Kiuas kiuas;
+
         public MainPage()
         {
             this.InitializeComponent();
+            
+            // Checking temperature radio-button to be default checked.
             tempRadio.IsChecked = true;
+            
+            // Initializing new kiuas-object.
             kiuas = new Kiuas();
         }
 
@@ -35,8 +40,12 @@ namespace T08H04
             float value;
             if (float.TryParse(valueTextBox.Text, out value))
             {
+                // Checking which of the radio-buttons is checked. If none,
+                // throwing NotImplementedException.
                 if ((bool)tempRadio.IsChecked)
                 {
+                    // Changing the temperature value. If exception happens,
+                    // telling user that value could not be changed.
                     try
                     {
                         kiuas.Temperature = value;
@@ -48,6 +57,8 @@ namespace T08H04
                 }
                 else if ((bool)humRadio.IsChecked)
                 {
+                    // Changing the humidity value. If exception happens,
+                    // telling user that value could not be changed.
                     try
                     {
                         kiuas.Humidity = value;
@@ -66,10 +77,19 @@ namespace T08H04
             {
                 showInfoMessage("Could not parse value as float!");
             }
+
+            // Setting label texts to represent the kiuas-objects values.
             tempValLabel.Text = kiuas.Temperature.ToString();
             humValLabel.Text = kiuas.Humidity.ToString();
+            
+            // Setting valueTextBox to show zero.
             valueTextBox.Text = "0";
         }
+        
+        /// <summary>
+        /// Called when back-button is clicked. Removes latest character from
+        // valueTextBox if any are left.
+        /// </summary>
         private void backClicked(object sender, RoutedEventArgs e)
         {
             string line = valueTextBox.Text;
@@ -80,6 +100,10 @@ namespace T08H04
             }
         }
 
+        /// <summary>
+        /// Called when any of the buttons 0-9 or . is pressed. Adds caller-
+        /// buttons text to valueTextBox.
+        /// </summary>
         private void buttonClicked(object sender, RoutedEventArgs e)
         {
             hideInfoText();
@@ -87,12 +111,19 @@ namespace T08H04
             valueTextBox.Text += buttonString;
         }
 
+        /// <summary>
+        /// Simplified method to show info-message. Sets it's content and shows
+        /// it (sets to visible).
+        /// </summary>
         private void showInfoMessage(string msg)
         {
             infoTextBlock.Text = msg;
             infoTextBlock.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Method to hide info-text. Increases code readability.
+        /// </summary>
         private void hideInfoText()
         {
             infoTextBlock.Visibility = Visibility.Collapsed; // Hides info text.
