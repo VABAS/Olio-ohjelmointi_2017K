@@ -9,7 +9,7 @@ namespace T08H04
     class Kiuas
     {
         // Setting maximum values as readonly parameters.
-        private readonly double maxTemperature = 1200;
+        private readonly double maxTemperature = 120;
         private readonly double maxHumidity = 100;
         
         // Private properties.
