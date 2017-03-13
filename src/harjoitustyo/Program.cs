@@ -17,9 +17,26 @@ namespace KeyRegisterApp
         /// </summary>
         public static void Main ()
         {
+            KeyRegister kr;
+
+            // Getting settings.
+            SettingsHandler sh = new SettingsHandler ();
+
+            // Setting KeyRegister object to represent some of the implemented data sources.
+            if (sh.RegisterType.ToUpper() == "XML")
+            {
+                kr = new KeyRegisterXml(sh.RegisterXmlFileLocation);
+            }
+            else
+            {
+                throw new SettingsHandler.InvalidSettingValue ("Invalid register type '" +
+                                                               sh.RegisterType +
+                                                               "' specified");
+            }
+
+            // Stargin Gtk-application.
             Gtk.Application.Init ();
-            //KeyRegisterWindow gui = 
-            new MainApplicationWindow ();
+            new MainApplicationWindow (kr);
             Gtk.Application.Run ();
         }
     }

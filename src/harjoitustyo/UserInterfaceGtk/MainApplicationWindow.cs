@@ -16,9 +16,9 @@ namespace KeyRegisterApp
         private LoanViewMenu loanViewMenu;
 
         // Main constructor.
-        public MainApplicationWindow () : base ("Key register application")
+        public MainApplicationWindow (KeyRegister keyRegister) : base ("Key register application")
         {
-            keyRegister = new KeyRegisterXml ("KeyRegister.xml");
+            this.keyRegister = keyRegister;
 
             // Setting size of the window.
             SetSizeRequest (900, 700);

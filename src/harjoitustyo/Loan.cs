@@ -51,7 +51,7 @@ namespace KeyRegisterApp
         /// <param name="addInfo">Additional information about the loan.</param>
         public Loan (int loanDbId, int keyId, string dateStart, string dateEnd, string loanedTo, bool returned, string addInfo)
         {
-            // Checking that dates is properly formatted.
+            // Checking that dates are properly formatted.
             DateTime temporaryDate;
             if (dateStart.Split ('-').Length != 3 ||
                 !DateTime.TryParse (dateStart, out temporaryDate)) {
@@ -76,6 +76,7 @@ namespace KeyRegisterApp
 
         /// <summary>
         /// Creates new instance of <see cref="Loan"/> class. dateEnd can be set to <see cref="null"/>.
+        /// No loanDbId defined.
         /// </summary>
         /// <param name="keyId">Id of the key</param>
         /// <param name="dateStart">Starting date of the loan</param>

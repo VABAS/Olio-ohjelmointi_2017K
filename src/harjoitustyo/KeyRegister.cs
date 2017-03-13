@@ -226,21 +226,6 @@ namespace KeyRegisterApp
         public abstract void setLoanReturned (int id);
 
         // Exception classes.
-        public class LoanIdNotFoundException : System.Exception
-        {
-            public LoanIdNotFoundException() : base() { }
-            public LoanIdNotFoundException(string message) : base(message) { }
-        }
-        public class LoanUniquenessException : System.Exception
-        {
-            public LoanUniquenessException() : base() { }
-            public LoanUniquenessException(string message) : base(message) { }
-        }
-        public class KeyNotLoanableException : System.Exception
-        {
-            public KeyNotLoanableException() : base() { }
-            public KeyNotLoanableException(string message) : base(message) { }
-        }
         public class KeyIdNotFoundException : System.Exception
         {
             public KeyIdNotFoundException() : base() { }
@@ -255,6 +240,21 @@ namespace KeyRegisterApp
         {
             public KeyUniquenessException() : base() { }
             public KeyUniquenessException(string message) : base(message) { }
+        }
+        public class KeyNotLoanableException : System.Exception
+        {
+            public KeyNotLoanableException() : base() { }
+            public KeyNotLoanableException(string message) : base(message) { }
+        }
+        public class LoanIdNotFoundException : System.Exception
+        {
+            public LoanIdNotFoundException() : base() { }
+            public LoanIdNotFoundException(string message) : base(message) { }
+        }
+        public class LoanUniquenessException : System.Exception
+        {
+            public LoanUniquenessException() : base() { }
+            public LoanUniquenessException(string message) : base(message) { }
         }
     }
 }
