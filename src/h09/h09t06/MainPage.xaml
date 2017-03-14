@@ -1,0 +1,19 @@
+﻿<Page
+    x:Class="H09T06.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:H09T06"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <RelativePanel>
+            <Button Name="generateButton" Content="Generate" Margin="3" Click="GenerateEmployees"/>
+            <Button Name="saveButton" Content="Save" Margin="3" RelativePanel.RightOf="generateButton" Click="SaveEmployees"/>
+            <Button Name="readButton" Content="Read" Margin="3" RelativePanel.RightOf="saveButton" Click="ReadEmployees"/>
+            <TextBlock Name="pathTextBlock" TextWrapping="Wrap" RelativePanel.Below="generateButton"/>
+            <TextBlock Name="EmployeesTextBlock" TextWrapping="Wrap" RelativePanel.Below="pathTextBlock"/>
+        </RelativePanel>
+    </Grid>
+</Page>
