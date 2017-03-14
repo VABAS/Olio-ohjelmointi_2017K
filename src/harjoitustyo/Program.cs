@@ -20,7 +20,6 @@ namespace KeyRegisterApp
 
             // Getting settings.
             SettingsHandler sh = new SettingsHandler ();
-
             // Setting KeyRegister object to represent some of the implemented data sources. New
             // sources can be easily added by first inheriting from KeyRegister-class and
             // implementing the required methods. Then adding it here, will make it available.
@@ -36,7 +35,7 @@ namespace KeyRegisterApp
                                                                "' specified");
             }
 
-            // Stargin Gtk-application.
+            // Starting Gtk-application.
             Gtk.Application.Init ();
             new MainApplicationWindow (kr, sh);
             Gtk.Application.Run ();

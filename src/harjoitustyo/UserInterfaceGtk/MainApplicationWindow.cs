@@ -8,17 +8,21 @@ namespace KeyRegisterApp
         private KeyView keyView;
         private LoanView loanView;
         private SettingsView settingsView;
-        private KeyRegister keyRegister;
         private MainTabbedView noteBook;
         private HBox container;
 
         private KeyViewMenu keyViewMenu;
         private LoanViewMenu loanViewMenu;
+        
+        private KeyRegister keyRegister;
+        private SettingsHandler settingsHandler;
 
         // Main constructor.
-        public MainApplicationWindow (KeyRegister keyRegister) : base ("Key register application")
+        public MainApplicationWindow (KeyRegister keyRegister, SettingsHandler settingsHandler)
+            : base ("Key register application")
         {
             this.keyRegister = keyRegister;
+            this.settingsHandler = settingsHandler;
 
             // Setting size of the window.
             SetSizeRequest (900, 700);
@@ -73,7 +77,7 @@ namespace KeyRegisterApp
             noteBook.SetTabLabelText (loanView, "Loan listing");
 
             // Adding settings tab.
-            settingsView = new SettingsView ();
+            settingsView = new SettingsView (settingsHandler);
             noteBook.Add (settingsView);
             noteBook.SetTabLabelText (settingsView, "Settings");
 

@@ -27,8 +27,8 @@ namespace KeyRegisterApp
         {
             settingsDict = new Dictionary<string, string>();
             // Setting default values.
-            settingsDict.Add("registerType", "XML");
-            settingsDict.Add("registerXmlFileLocation", "KeyRegister.xml");
+            settingsDict.Add("RegisterType", "XML");
+            settingsDict.Add("RegisterXmlFileLocation", "KeyRegister.xml");
 
             configFileLocation = settingsFile;
             if (File.Exists(settingsFile))
@@ -37,17 +37,13 @@ namespace KeyRegisterApp
                 string line;
                 while ((line = file.ReadLine()) != null)
                 {
-                    string[] valuePair = line.Split (':');
-                    try
-                    {
-                        settingsDict.Add (valuePair [0], valuePair [1]);
-                    }
-                    catch (ArgumentException)
-                    {
-                        Console.WriteLine ("[WARNING] Value of setting " + valuePair [0] +
-                                           " was specified multiple times at settings file! " +
-                                           "Only the last defined value will be used!");
-                        settingsDict [valuePair [0]] = valuePair [1];
+                    if (line.Length > 0) {
+                        string[] valuePair = line.Split (':');
+                        try {
+                            settingsDict.Add (valuePair [0], valuePair [1]);
+                        } catch (ArgumentException) {
+                            settingsDict [valuePair [0]] = valuePair [1];
+                        }
                     }
                 }
                 file.Close ();

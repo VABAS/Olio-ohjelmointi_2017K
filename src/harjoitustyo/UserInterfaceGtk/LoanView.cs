@@ -41,9 +41,6 @@ namespace KeyRegisterApp
             startDateColumn.AddAttribute (startDateCell, "text", 2);
             dueDateColumn.AddAttribute (dueDateCell, "text", 3);
             loanedToColumn.AddAttribute (loanedToCell, "text", 4);
-            /*keyIdColumn.MaxWidth = 100;
-            startDateColumn.MaxWidth = 100;
-            dueDateColumn.MaxWidth = 200;*/
 
             listStore = new ListStore (typeof(int),
                                        typeof(string),
