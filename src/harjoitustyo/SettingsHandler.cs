@@ -74,13 +74,6 @@ namespace KeyRegisterApp
             }
             outFile.Close ();
         }
-
-        // Exception classes.
-        public class InvalidSettingValue : System.Exception
-        {
-            public InvalidSettingValue() : base() { }
-            public InvalidSettingValue(string message) : base(message) { }
-        }
     }
 }
 

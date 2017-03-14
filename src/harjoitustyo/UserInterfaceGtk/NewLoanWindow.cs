@@ -15,7 +15,7 @@ namespace KeyRegisterApp
         protected Entry loanerEntry;
         protected Entry additionalEntry;
         protected Button actionButton;
-        protected Label KeyIdLabel;
+        protected Label keyIdLabel;
         protected Label buttonInstructionLabel;
 
         public NewLoanWindow (KeyRegister keyRegister, string title) : base (keyRegister, title)
@@ -26,11 +26,11 @@ namespace KeyRegisterApp
             WidthRequest = 650;
             
             // Indentifier entry.
-            KeyIdLabel = new Label ("Key identifier (required):");
+            keyIdLabel = new Label ("Key identifier (required):");
             keyIdEntry = new Entry ();
             keyIdEntry.WidthRequest = entryWidth;
             keyIdEntry.Changed += onEntryChange;
-            container.Put (KeyIdLabel, 10, 10 + groupSpacing * 0);
+            container.Put (keyIdLabel, 10, 10 + groupSpacing * 0);
             container.Put (keyIdEntry, 10, 10 + groupSpacing * 0 + labelEntrySpacing);
 
             // Start date entry.

@@ -9,7 +9,7 @@ namespace KeyRegisterApp
         {
             keyIdEntry.Text = keyRegister.getKeyById(keyDbId).Identifier;
             keyIdEntry.Sensitive = false;
-            KeyIdLabel.Text = "Key identifier (locked)";
+            keyIdLabel.Text = "Key identifier (locked)";
             somethingChanged = false;
         }
     }

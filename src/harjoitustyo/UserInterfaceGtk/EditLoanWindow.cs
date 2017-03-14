@@ -14,7 +14,7 @@ namespace KeyRegisterApp
             keyIdEntry.Sensitive = false;
             keyIdEntry.TooltipText = "Key identifier cannot be changed. " +
                                      "Issue new loan for new key if you want to transfer loan";
-            KeyIdLabel.Text = "Key identifier (locked)";
+            keyIdLabel.Text = "Key identifier (locked)";
 
             // Setting calendars.
             dateStartCal.Year = loan.parseStartDate () [0];
