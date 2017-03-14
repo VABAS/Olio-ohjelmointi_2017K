@@ -1,32 +1,35 @@
 using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace KeyRegisterApp
 {
     public class SettingsHandler
     {
+        private Dictionary<string, string> settingsDict;
         private string configFileLocation;
 
-        // Setting values.
-        private string registerType = "XML";
-        private string registerXmlFileLocation = "KeyRegister.xml";
-
-        public string RegisterType {
-            get { return registerType; }
+        public Dictionary<string, string> Settings {
+            get {
+                return settingsDict;
+            }
             set {
-                registerType = value;
+                settingsDict = value;
+                writeToFile ();
             }
         }
 
-        public string RegisterXmlFileLocation {
-            get { return registerXmlFileLocation; }
-            set {
-                registerXmlFileLocation = value;
-            }
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="settingsFile">Settings file location.</param>
         public SettingsHandler (string settingsFile)
         {
+            settingsDict = new Dictionary<string, string>();
+            // Setting default values.
+            settingsDict.Add("registerType", "XML");
+            settingsDict.Add("registerXmlFileLocation", "KeyRegister.xml");
+
             configFileLocation = settingsFile;
             if (File.Exists(settingsFile))
             {
@@ -35,17 +38,16 @@ namespace KeyRegisterApp
                 while ((line = file.ReadLine()) != null)
                 {
                     string[] valuePair = line.Split (':');
-                    if (valuePair[0] == "RegisterType")
+                    try
                     {
-                        RegisterType = valuePair [1];
+                        settingsDict.Add (valuePair [0], valuePair [1]);
                     }
-                    else if (valuePair[0] == "RegisterXmlFileLocation")
+                    catch (ArgumentException)
                     {
-                        RegisterXmlFileLocation = valuePair [1];
-                    }
-                    else
-                    {
-                        Console.WriteLine ("[WARNING] Unknown setting '" + valuePair [0] + "'");
+                        Console.WriteLine ("[WARNING] Value of setting " + valuePair [0] +
+                                           " was specified multiple times at settings file! " +
+                                           "Only the last defined value will be used!");
+                        settingsDict [valuePair [0]] = valuePair [1];
                     }
                 }
                 file.Close ();
@@ -57,20 +59,22 @@ namespace KeyRegisterApp
             
         }
 
+        /// <summary>
+        /// Constructor for SettingsHandler with not config file location provided. Using default
+        /// location which is equal to the running location.
+        /// </summary>
         public SettingsHandler () : this ("KeyRegisterAppSettings.conf")
         { }
 
-        public void writeToFile()
+        /// <summary>
+        /// Writes settings to file.
+        /// </summary>
+        private void writeToFile()
         {
-            string[,] configArray = {
-                {"RegisterType", RegisterType},
-                {"RegisterXmlFileLocation", RegisterXmlFileLocation},
-            };
-
             StreamWriter outFile = new StreamWriter (configFileLocation);
-            for (int i = 0; i < configArray.GetLength(0); i++)
+            foreach(KeyValuePair<string, string> valuePair in settingsDict)
             {
-                outFile.WriteLine (configArray[i, 0] + ":" + configArray[i, 1]);
+                outFile.WriteLine (valuePair.Key + ":" + valuePair.Value);
             }
             outFile.Close ();
         }
