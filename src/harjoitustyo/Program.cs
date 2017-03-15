@@ -17,9 +17,10 @@ namespace KeyRegisterApp
         /// </summary>
         public static void Main ()
         {
-
+            /*
             // Getting settings.
             SettingsHandler sh = new SettingsHandler ();
+
             // Setting KeyRegister object to represent some of the implemented data sources. New
             // sources can be easily added by first inheriting from KeyRegister-class and
             // implementing the required methods. Then adding it here, will make it available.
@@ -33,11 +34,11 @@ namespace KeyRegisterApp
                 throw new SettingsHandler.InvalidSettingValue ("Invalid register type '" +
                                                                sh.Settings["RegisterType"] +
                                                                "' specified");
-            }
+            }*/
 
             // Starting Gtk-application.
             Gtk.Application.Init ();
-            new MainApplicationWindow (kr, sh);
+            new MainApplicationWindow ();
             Gtk.Application.Run ();
         }
     }

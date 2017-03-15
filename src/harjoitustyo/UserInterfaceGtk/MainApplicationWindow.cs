@@ -15,14 +15,17 @@ namespace KeyRegisterApp
         private LoanViewMenu loanViewMenu;
         
         private KeyRegister keyRegister;
+
+        // TODO: Can we find some use for that??
         private SettingsHandler settingsHandler;
 
         // Main constructor.
-        public MainApplicationWindow (KeyRegister keyRegister, SettingsHandler settingsHandler)
+        public MainApplicationWindow ()//KeyRegister keyRegister, SettingsHandler settingsHandler)
             : base ("Key register application")
         {
-            this.keyRegister = keyRegister;
-            this.settingsHandler = settingsHandler;
+            //this.keyRegister = keyRegister;
+            //this.settingsHandler = settingsHandler;
+            loadSettings ();
 
             // Setting size of the window.
             SetSizeRequest (900, 700);
@@ -33,13 +36,13 @@ namespace KeyRegisterApp
             // Adding deleteEvent.
             DeleteEvent += OnDeleteEvent;
 
-            //container = new Fixed ();
+            // Creating new HBox for container widget to our window.
             container = new HBox ();
 
-
+            // Adding container to the window.
             Add (container);
 
-            // Adding menus.
+            // Adding menus. Button clicks assigned here also.
             keyViewMenu = new KeyViewMenu ();
             keyViewMenu.addNewKey.Clicked += addNewKeyClicked;
             keyViewMenu.editKey.Clicked += editKeyClicked;
@@ -80,6 +83,7 @@ namespace KeyRegisterApp
             settingsView = new SettingsView (settingsHandler);
             noteBook.Add (settingsView);
             noteBook.SetTabLabelText (settingsView, "Settings");
+            settingsView.addButtonEvent = saveSettingsButtonClicked;
 
             // Updating tables.
             doUpdates ();
@@ -121,54 +125,9 @@ namespace KeyRegisterApp
             }
         }
 
-        /// <summary>
-        /// Updates key and loan tables from register.
-        /// </summary>
-        public void doUpdates ()
-        {
-            keyView.addValues (keyRegister.getAllKeys ());
-            loanView.addValues (keyRegister.getAllActiveLoans ());
-        }
-
-        /// <summary>
-        /// Method run when main-window is closed.
-        /// </summary>
-        protected void OnDeleteEvent (object sender, DeleteEventArgs a)
-        {
-            Application.Quit ();
-        }
-
-        /// <summary>
-        /// Method run when new key window is closed.
-        /// </summary>
-        protected void newKeyWindowDestroyed (object o, EventArgs a)
-        {
-            doUpdates ();
-        }
-
-        /// <summary>
-        /// Method run when edit key window is closed.
-        /// </summary>
-        protected void editKeyWindowDestroyed (object o, EventArgs a)
-        {
-            doUpdates ();
-        }
-
-        protected void newLoanWindowDestroyed (object o, EventArgs a)
-        {
-            doUpdates ();
-        }
-
-        protected void editLoanWindowDestroyed (object o, EventArgs a)
-        {
-            doUpdates ();
-        }
-
-        protected void showKeyDetailsWindowDestroyed (object o, EventArgs a)
-        {
-            doUpdates ();
-        }
-
+        ////////////////////
+        //  FOR KEY-VIEW  //
+        ////////////////////
         /// <summary>
         /// Opening new key window.
         /// </summary>
@@ -275,7 +234,9 @@ namespace KeyRegisterApp
             }
             newLoanToKeyWindow.Destroyed += newLoanWindowDestroyed;
         }
-
+        /////////////////////
+        //  FOR LOAN-VIEW  //
+        /////////////////////
         protected void addNewLoanClicked (object o, EventArgs e)
         {
             Window newLoanWindow = new NewLoanWindow (keyRegister, "Add new loan");
@@ -309,6 +270,95 @@ namespace KeyRegisterApp
             doUpdates ();
         }
 
+        /////////////////////////
+        //  FOR SETTINGS-VIEW  //
+        /////////////////////////
+        private void saveSettingsButtonClicked (object o, EventArgs e)
+        {
+            bool somethingChanged = false;
+            foreach (System.Collections.Generic.KeyValuePair<string, Entry> pair in settingsView.DictOfEntries) {
+                if (settingsHandler.Settings [pair.Key] != pair.Value.Text) {
+                    settingsHandler.Settings [pair.Key] = pair.Value.Text;
+                    somethingChanged = true;
+                }
+            }
+            if (somethingChanged) {
+                settingsHandler.writeToFile ();
+                loadSettings ();
+                doUpdates ();
+            }
+            else {
+                showInfoDialog ("Nothing changed");
+            }
+        }
+
+        /////////////////////////////
+        //  WINDOW DESTROY EVENTS  //
+        /////////////////////////////
+        protected void OnDeleteEvent (object sender, DeleteEventArgs a)
+        {
+            Application.Quit ();
+        }
+
+        protected void newKeyWindowDestroyed (object o, EventArgs a)
+        {
+            doUpdates ();
+        }
+
+        protected void editKeyWindowDestroyed (object o, EventArgs a)
+        {
+            doUpdates ();
+        }
+
+        protected void newLoanWindowDestroyed (object o, EventArgs a)
+        {
+            doUpdates ();
+        }
+
+        protected void editLoanWindowDestroyed (object o, EventArgs a)
+        {
+            doUpdates ();
+        }
+
+        protected void showKeyDetailsWindowDestroyed (object o, EventArgs a)
+        {
+            doUpdates ();
+        }
+
+        /////////////////////
+        //  OTHER METHODS  //
+        /////////////////////
+
+        public void loadSettings ()
+        {
+            // Getting settings.
+            this.settingsHandler = new SettingsHandler ();
+
+            // Setting KeyRegister object to represent some of the implemented data sources. New
+            // sources can be easily added by first inheriting from KeyRegister-class and
+            // implementing the required methods. Then adding it here, will make it available.
+            //KeyRegister kr;
+            if (settingsHandler.Settings["RegisterType"].ToUpper() == "XML")
+            {
+                this.keyRegister = new KeyRegisterXml(settingsHandler.Settings["RegisterXmlFileLocation"]);
+            }
+            else
+            {
+                throw new SettingsHandler.InvalidSettingValue ("Invalid register type '" +
+                                                               settingsHandler.Settings["RegisterType"] +
+                                                               "' specified");
+            }
+        }
+
+        /// <summary>
+        /// Updates key and loan tables from register.
+        /// </summary>
+        public void doUpdates ()
+        {
+            keyView.addValues (keyRegister.getAllKeys ());
+            loanView.addValues (keyRegister.getAllActiveLoans ());
+        }
+
         private bool showConfirmationDialog (string text)
         {
             MessageDialog confirmation = new MessageDialog (this,
@@ -330,6 +380,17 @@ namespace KeyRegisterApp
             {
                 throw new NotImplementedException ("Unknown button press value for confirmation dialog.");
             }
+        }
+
+        private void showInfoDialog (string text)
+        {
+            MessageDialog confirmation = new MessageDialog (this,
+                                                            DialogFlags.DestroyWithParent,
+                                                            MessageType.Info,
+                                                            ButtonsType.Close,
+                                                            text);
+            confirmation.Run ();
+            confirmation.Destroy ();
         }
     }
 }

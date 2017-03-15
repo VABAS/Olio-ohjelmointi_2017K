@@ -8,7 +8,6 @@ namespace KeyRegisterApp
         public EditKeyWindow (KeyRegister keyRegister, string title, Key key) : base (keyRegister, title)
         {
             this.key = key;
-            //this.keyRegister = keyRegister;
             idEntry.Text = key.Identifier;
             nameEntry.Text = key.Name;
             descriptionEntry.Text = key.Description;
@@ -18,7 +17,6 @@ namespace KeyRegisterApp
             buttonInstructionLabel.Text = "Nothing modified";
             buttonInstructionLabel.Visible = true;
             container.Move (buttonInstructionLabel, 120, 10 + groupSpacing * 3);
-            //keyDbId = keyRegister.getKeyIdByIdentifier (key.Identifier);
         }
 
         protected override void onActionButtonClicked (object o, EventArgs e)

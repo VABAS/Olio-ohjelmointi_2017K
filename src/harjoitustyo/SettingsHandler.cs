@@ -15,7 +15,7 @@ namespace KeyRegisterApp
             }
             set {
                 settingsDict = value;
-                writeToFile ();
+                //writeToFile ();
             }
         }
 
@@ -65,7 +65,7 @@ namespace KeyRegisterApp
         /// <summary>
         /// Writes settings to file.
         /// </summary>
-        private void writeToFile()
+        public void writeToFile()
         {
             StreamWriter outFile = new StreamWriter (configFileLocation);
             foreach(KeyValuePair<string, string> valuePair in settingsDict)
@@ -73,6 +73,13 @@ namespace KeyRegisterApp
                 outFile.WriteLine (valuePair.Key + ":" + valuePair.Value);
             }
             outFile.Close ();
+        }
+
+        //Exception classes.
+        public class InvalidSettingValue : System.Exception
+        {
+            public InvalidSettingValue() : base() { }
+            public InvalidSettingValue(string message) : base(message) { }
         }
     }
 }
