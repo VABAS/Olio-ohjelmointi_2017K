@@ -58,3 +58,11 @@
 * [Tehtävä 2](src/h08/h08t02/)
 * [Tehtävä 3](src/h08/h08t03/)
 * [Tehtävä 4](src/h08/h08t04/)
+
+## Harjoitukset 9
+* [Tehtävä 1](src/h09/h09t01/)
+* [Tehtävä 2](src/h09/h09t02/)
+* [Tehtävä 3](src/h09/h09t03/)
+* [Tehtävä 4](src/h09/h09t04/)
+* [Tehtävä 5](src/h09/h09t05/)
+* [Tehtävä 6](src/h09/h09t06/)
