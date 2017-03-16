@@ -8,10 +8,16 @@ namespace KeyRegisterApp
     {
         private Dictionary<string, Entry> dictOfEntries;
         private Button saveSettingsButton;
+        private Button revertSettingsButton;
         private Label informationLabel;
-        public EventHandler addButtonEvent {
+        public EventHandler addSaveButtonEvent {
             set {
                 saveSettingsButton.Clicked += value;
+            }
+        }
+        public EventHandler addRevertButtonEvent {
+            set {
+                revertSettingsButton.Clicked += value;
             }
         }
 
@@ -57,7 +63,15 @@ namespace KeyRegisterApp
             // Adding save button.
             table.NRows++;
             saveSettingsButton = new Button ("Save settings");
-            table.Attach (saveSettingsButton, 1, 2, table.NRows - 1, table.NRows, Gtk.AttachOptions.Fill, Gtk.AttachOptions.Fill, 3, 5);
+            revertSettingsButton = new Button ("Revert settings");
+
+            Table buttonsTable = new Table (2, 1, false);
+            buttonsTable.RowSpacing = 3;
+
+            table.Attach (buttonsTable, 0, 2, table.NRows - 1, table.NRows, Gtk.AttachOptions.Fill, Gtk.AttachOptions.Fill, 3, 5);
+            
+            buttonsTable.Attach (saveSettingsButton, 0, 1, 0, 1);
+            buttonsTable.Attach (revertSettingsButton, 1, 2, 0, 1);
 
             // Adding information label.
             table.NRows++;

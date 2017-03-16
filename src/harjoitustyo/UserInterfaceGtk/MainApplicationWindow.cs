@@ -15,16 +15,11 @@ namespace KeyRegisterApp
         private LoanViewMenu loanViewMenu;
         
         private KeyRegister keyRegister;
-
-        // TODO: Can we find some use for that??
         private SettingsHandler settingsHandler;
 
         // Main constructor.
-        public MainApplicationWindow ()//KeyRegister keyRegister, SettingsHandler settingsHandler)
-            : base ("Key register application")
+        public MainApplicationWindow () : base ("Key register application")
         {
-            //this.keyRegister = keyRegister;
-            //this.settingsHandler = settingsHandler;
             loadSettings ();
 
             // Setting size of the window.
@@ -83,7 +78,7 @@ namespace KeyRegisterApp
             settingsView = new SettingsView (settingsHandler);
             noteBook.Add (settingsView);
             noteBook.SetTabLabelText (settingsView, "Settings");
-            settingsView.addButtonEvent = saveSettingsButtonClicked;
+            settingsView.addSaveButtonEvent = saveSettingsButtonClicked;
 
             // Updating tables.
             doUpdates ();
