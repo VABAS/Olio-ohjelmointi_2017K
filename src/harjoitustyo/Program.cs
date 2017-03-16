@@ -4,6 +4,7 @@
 // KeyRegisterApp.exe to that same directory. Comiling requires gtk-sharp-3.0.
 
 using System;
+using System.Collections.Generic;
 
 namespace KeyRegisterApp
 {
@@ -15,31 +16,23 @@ namespace KeyRegisterApp
         /// <summary>
         /// The entry point of the program, where the program control starts and ends.
         /// </summary>
-        public static void Main ()
+        public static void Main (string[] args)
         {
-            /*
-            // Getting settings.
-            SettingsHandler sh = new SettingsHandler ();
-
-            // Setting KeyRegister object to represent some of the implemented data sources. New
-            // sources can be easily added by first inheriting from KeyRegister-class and
-            // implementing the required methods. Then adding it here, will make it available.
-            KeyRegister kr;
-            if (sh.Settings["RegisterType"].ToUpper() == "XML")
-            {
-                kr = new KeyRegisterXml(sh.Settings["RegisterXmlFileLocation"]);
+            // Deciding wether to start gui or CLI. CLI is started if arguments are present.
+            if (args.Length > 0) {
+                CliApplication cli = new CliApplication ();
+                string command = args [0];
+                List<string> commandArgs = new List<string> (args);
+                commandArgs.RemoveAt (0);
+                cli.runCommand (command, commandArgs.ToArray ());
             }
             else
             {
-                throw new SettingsHandler.InvalidSettingValue ("Invalid register type '" +
-                                                               sh.Settings["RegisterType"] +
-                                                               "' specified");
-            }*/
-
-            // Starting Gtk-application.
-            Gtk.Application.Init ();
-            new MainApplicationWindow ();
-            Gtk.Application.Run ();
+                // Starting Gtk-application.
+                Gtk.Application.Init ();
+                new MainApplicationWindow ();
+                Gtk.Application.Run ();
+            }
         }
     }
 }
