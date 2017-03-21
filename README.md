@@ -66,3 +66,11 @@
 * [Tehtävä 4](src/h09/h09t04/)
 * [Tehtävä 5](src/h09/h09t05/)
 * [Tehtävä 6](src/h09/h09t06/)
+
+## Harjoitukset 10
+* [Tehtävä 1](src/h10/h10t01/)
+* [Tehtävä 2](src/h10/h10t02/)
+* [Tehtävä 3](src/h10/h10t03/)
+* [Tehtävä 4](src/h10/h10t04/)
+* [Tehtävä 5](src/h10/h10t05/)
+* [Tehtävä 6](src/h10/h10t06/)
