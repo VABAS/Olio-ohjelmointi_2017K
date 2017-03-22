@@ -21,10 +21,7 @@ namespace KeyRegisterApp
             // Deciding wether to start gui or CLI. CLI is started if arguments are present.
             if (args.Length > 0) {
                 CliApplication cli = new CliApplication ();
-                string command = args [0];
-                List<string> commandArgs = new List<string> (args);
-                commandArgs.RemoveAt (0);
-                cli.runCommand (command, commandArgs.ToArray ());
+                cli.runCommand (args);
             }
             else
             {

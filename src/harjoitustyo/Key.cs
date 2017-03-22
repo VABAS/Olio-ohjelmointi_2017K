@@ -75,7 +75,11 @@ namespace KeyRegisterApp
 
         public override string ToString ()
         {
-            return Identifier + ", " + IsMissing + ", " + Name + ", " + Description;
+            return "Key.DbId: " + DbId + "\n" +
+                   "Key.Identifier: " + Identifier + "\n" +
+                   "Key.IsMissing: " + IsMissing.ToString() + "\n" +
+                   "Key.Name: " + Name + "\n" +
+                   "Key.Description: " + Description;
         }
 
         // Exception classes.
