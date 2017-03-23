@@ -219,7 +219,7 @@ namespace KeyRegisterApp
         }
 
         /// <summary>
-        /// Sets the loan with specified id returned. Trows <see cref="LoanIdNotFoundException"/>  if loan with specified id cannot be found.
+        /// Sets the loan with specified id returned. Throws <see cref="LoanIdNotFoundException"/>  if loan with specified id cannot be found.
         /// </summary>
         /// <param name="id">Id of the loan to set returned.</param>
         /// <exception cref="LoanIdNotFoundException">Trows LoanIdNotFoundException if loan with specified id cannot be found.</exception>

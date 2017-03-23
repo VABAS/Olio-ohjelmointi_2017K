@@ -132,6 +132,16 @@ namespace KeyRegisterApp
             returned = true;
         }
 
+        public override string ToString ()
+        {
+            return "keyId: " + KeyId + "\n" +
+                   "dateStart: " + DateStart + "\n" +
+                   "dateEnd: " + DateEnd + "\n" +
+                   "loanedTo: " + LoanedTo + "\n" +
+                   "returned: " + Returned + "\n" +
+                   "additionalInformation: " + AdditionalInformation;
+        }
+
         public class InvalidDateException : System.Exception
         {
             public InvalidDateException() : base() { }
