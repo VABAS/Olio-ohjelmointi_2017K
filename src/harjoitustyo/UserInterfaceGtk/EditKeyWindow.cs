@@ -8,6 +8,7 @@ namespace KeyRegisterApp
         public EditKeyWindow (KeyRegister keyRegister, string title, Key key) : base (keyRegister, title)
         {
             this.key = key;
+            this.Title = "Edit key " + key.Identifier;
             idEntry.Text = key.Identifier;
             nameEntry.Text = key.Name;
             descriptionEntry.Text = key.Description;

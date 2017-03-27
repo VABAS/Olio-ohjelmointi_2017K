@@ -10,7 +10,9 @@ namespace KeyRegisterApp
         {
             Loan loan = keyRegister.getLoanById (loanDbId);
             this.loanDbId = loanDbId;
-            keyIdEntry.Text = keyRegister.getKeyById(loan.KeyId).Identifier;
+            string keyIdentifier = keyRegister.getKeyById (loan.KeyId).Identifier;
+            keyIdEntry.Text = keyIdentifier;
+            this.Title = "Edit loan for key " + keyIdentifier;
             keyIdEntry.Sensitive = false;
             keyIdEntry.TooltipText = "Key identifier cannot be changed. " +
                                      "Issue new loan for new key if you want to transfer loan";
