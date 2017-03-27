@@ -8,8 +8,36 @@ namespace KeyRegisterApp
     /// </summary>
     public class CliApplication
     {
-        KeyRegister keyRegister;
-        SettingsHandler settingsHandler;
+        private KeyRegister keyRegister;
+        private SettingsHandler settingsHandler;
+        private static string usage = "Usage: KeyRegisterApp.exe [command] [arguments]";
+        private static string helpString =
+                "\nAvailable commands:\n" +
+                "\n  listkeys - Lists all keys in register\n" +
+                "\n  keydetails [keyDbId] - Shows information about key\n" +
+                "\n  addkey [keyArgs] - Adds new key to register\n" +
+                "    Where keyArgs are any combination of\n" +
+                "    identifier=[value], name=[value] and description=[value]\n" +
+                "    However, identifier and name are required for new key.\n" +
+                "\n  editkey [keyDbId] [keyArgs] - Modifies key\n" +
+                "    Where keyArgs are any combination of\n" +
+                "    identifier=[value], name=[value] and description=[value]\n" +
+                "    Any field value left out is considered not edited.\n" +
+                "\n  setkeymissing [keyDbId] - Sets key to missing\n" +
+                "\n  removekey [keyDbId] - Removes key from register\n" +
+                "\n  loankey [keyDbId] [loanArgs] - Adds new loan for key\n" +
+                "    Where loanArgs are any combination of\n" +
+                "    datestart=[YYYY-mm-dd], datedue=[YYYY-mm-dd], loanedto=[value], isreturned=[true/false] and additional=[value]\n" +
+                "    Only datestart must be provided.\n" +
+                "\n  addloan - alias for loankey.\n" +
+                "\n  listloans- lists all loans\n" +
+                "\n  loandetails [loanDbId] - Shows details about loan\n" +
+                "\n  editloan [loanDbId] [loanArgs] - Modifies loan\n" +
+                "    Where loanArgs are any combination of\n" +
+                "    datestart=[YYYY-mm-dd], datedue=[YYYY-mm-dd], loanedto=[value], isreturned=[true/false] and additional=[value]\n" +
+                "    Any field value left out is considered not edited.\n" +
+                "\n  returnloan [loanDbId] - Sets loan returned\n" +
+                "\n  help - Display information about available operations.\n";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="KeyRegisterApp.CliApplication"/> class.
@@ -94,6 +122,7 @@ namespace KeyRegisterApp
                 }
                 break;
             case "loankey":
+            case "addloan":
                 if (int.TryParse (args [0], out dbId)) {
                     args.RemoveAt (0);
                     addLoanToKey (dbId, args);
@@ -117,17 +146,26 @@ namespace KeyRegisterApp
                     Console.WriteLine ("Provided id not parsable as integer!");
                 }
                 break;
-            case "addloan":
-                // TODO
-                break;
             case "editloan":
-                // TODO
+                if (int.TryParse(args[0], out dbId)) {
+                    args.RemoveAt (0);
+                    editLoan (dbId, args);
+                }
+                else {
+                    Console.WriteLine ("Provided id not parsable as integer!");
+                }
                 break;
             case "returnloan":
-                // TODO
+                if (int.TryParse(args[0], out dbId)) {
+                    args.RemoveAt (0);
+                    setLoanReturned (dbId);
+                }
+                else {
+                    Console.WriteLine ("Provided id not parsable as integer!");
+                }
                 break;
             case "help":
-                // TODO
+                Console.WriteLine (usage + "\n" + helpString);
                 break;
             default:
                 Console.WriteLine ("Unknown command");
@@ -170,7 +208,7 @@ namespace KeyRegisterApp
             args = parseKeyFields (args);
             if (args[0] != null && args[1] != null) {
                 try {
-                    keyRegister.addNewKey(args [0], false, args [2], args [3]);
+                    keyRegister.addNewKey(args [0], false, args [1], args [2]);
                 }
                 catch (KeyRegister.KeyUniquenessException e) {
                     Console.WriteLine ("Could not add key: " + e.Message);
@@ -276,9 +314,13 @@ namespace KeyRegisterApp
         }
 
         /// <summary>
-        /// Parses the loan fields provided as parameters.
+        /// Parses the loan fields provided as parameters. Returns list of strings like
+        /// {dateStart, dateEnd, loanedTo, isReturned, aditional}. Any missing field is set to
+        /// <see cref="null"/>.
         /// </summary>
-        /// <returns>The loan fields.</returns>
+        /// <returns>
+        /// The loan fields as list of strings like {dateStart, dateEnd, loanedTo, isReturned, aditional}.
+        /// </returns>
         /// <param name="args">Arguments.</param>
         private List<string> parseLoanFields(List<string> args) {
             List<string> returnValue = new List<string> { null, null, null, null, null };
@@ -359,6 +401,25 @@ namespace KeyRegisterApp
             try {
                 Loan key = keyRegister.getLoanById (dbId);
                 Console.Write(key.ToString());
+            }
+            catch (KeyRegister.LoanIdNotFoundException e) {
+                Console.WriteLine (e.Message);
+            }
+        }
+
+        private void editLoan(int id, List<string> args) {
+            args = parseLoanFields (args);
+            try {
+                // Index 3-IsReturned cannot be provided to modify operation.
+                keyRegister.modifyLoanById (id, args [0], args [1], args [2], args [4]);
+            }
+            catch (KeyRegister.LoanIdNotFoundException e) {
+                Console.WriteLine (e.Message);
+            }
+        }
+        private void setLoanReturned (int id) {
+            try {
+                keyRegister.setLoanReturned(id);
             }
             catch (KeyRegister.LoanIdNotFoundException e) {
                 Console.WriteLine (e.Message);
