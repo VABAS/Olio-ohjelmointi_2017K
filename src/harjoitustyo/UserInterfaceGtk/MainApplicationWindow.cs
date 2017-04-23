@@ -173,7 +173,12 @@ namespace KeyRegisterApp
                                                     key.Identifier + "'?");
             if (doRemove)
             {
-                keyRegister.deleteKeyById (dbId);
+                try {
+                    keyRegister.deleteKeyById (dbId);
+                }
+                catch (KeyRegister.DependencyException ex) {
+                    showInfoDialog (ex.Message);
+                }
                 doUpdates ();
             }
         }

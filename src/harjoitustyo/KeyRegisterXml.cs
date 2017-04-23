@@ -98,13 +98,27 @@ namespace KeyRegisterApp
         /// <param name="id">Id of the key to delete.</param>
         public override void deleteKeyById (int id)
         {
-            // TODO: All referenced loans must be deleted as well.
-            // TODO: Active loans must be checked and delete should fail if found (dependency).
             XmlNode keyToRemove = root.SelectSingleNode ("key[@id='" +
                                                          id.ToString () + "']");
             if (keyToRemove != null) {
-                root.RemoveChild (keyToRemove);
-                writeToFile ();
+                // Checking that key has no active loans. If it has lets throw DependencyException.
+                if (getActiveLoanByKeyId(id) == null){
+                    // Removing the key.
+                    root.RemoveChild (keyToRemove);
+
+                    // Doing loan removal for removed key.
+                    foreach (Loan loan in getAllLoans())
+                    {
+                        if (loan.KeyId == id)
+                        {
+                            deleteLoanById (loan.LoanDbId);
+                        }
+                    }
+                    writeToFile ();
+                }
+                else {
+                    throw new DependencyException ("Key is currently loaned so it cannot be deleted.");
+                }
             } else {
                 throw new KeyIdNotFoundException ("Key with identifier '" +  id +
                                                   "' could not be found.");

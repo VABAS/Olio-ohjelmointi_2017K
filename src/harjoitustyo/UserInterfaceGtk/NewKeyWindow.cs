@@ -96,7 +96,7 @@ namespace KeyRegisterApp
             }
             catch (Key.IdTooShortException)
             {
-                showWarning ("ERROR: Identifier of the key is sorter than set minimum of " +
+                showWarning ("ERROR: Identifier of the key is shorter than set minimum of " +
                              Key.idMinLength.ToString () + "!");
             }
             catch (Key.NameTooShortException)

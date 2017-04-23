@@ -10,6 +10,8 @@ namespace KeyRegisterApp
         private Button saveSettingsButton;
         private Button revertSettingsButton;
         private Label informationLabel;
+        private SettingsHandler settingsHandler;
+
         public EventHandler addSaveButtonEvent {
             set {
                 saveSettingsButton.Clicked += value;
@@ -27,6 +29,8 @@ namespace KeyRegisterApp
 
         public SettingsView (SettingsHandler settingsHandler) : base()
         {
+            this.settingsHandler = settingsHandler;
+
             dictOfEntries = new Dictionary<string, Entry> ();
 
             // Table with two columns and initially zero rows.
@@ -75,11 +79,13 @@ namespace KeyRegisterApp
 
             // Adding information label.
             table.NRows++;
-            informationLabel = new Label ("Settings changed! You should save or revert the settings before continuing to use the program.");
+            informationLabel = new Label ("Settings changed! You should save the settings before continuing to use the program.");
             informationLabel.LineWrap = true;
             informationLabel.SetAlignment (0, 0);
             table.Attach (informationLabel, 0, 2, table.NRows - 1, table.NRows, Gtk.AttachOptions.Fill, Gtk.AttachOptions.Fill, 3, 5);
             this.Shown += shownHandler;
+            this.addSaveButtonEvent = hideInformationLabelHandler;
+            this.addRevertButtonEvent = doRevert;
         }
 
         void shownHandler (object o, EventArgs e)
@@ -89,14 +95,27 @@ namespace KeyRegisterApp
 
         private void somethingChanged (object o, EventArgs e)
         {
-            // TODO: Changing of view should not be allowed when settings are changed? Or should they?
             informationLabel.Visible = true;
+        }
+
+        private void doRevert (object o, EventArgs e)
+        {
+            foreach (KeyValuePair<string, Entry> valuePair in dictOfEntries) {
+                valuePair.Value.Text = settingsHandler.Settings [valuePair.Key];
+            }
+            hideInformationLabel ();
         }
 
         public void hideInformationLabel ()
         {
             informationLabel.Visible = false;
         }
+
+        public void hideInformationLabelHandler (object o, EventArgs e)
+        {
+            hideInformationLabel ();
+        }
+
     }
 }
 

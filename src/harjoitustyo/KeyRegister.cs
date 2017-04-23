@@ -256,5 +256,10 @@ namespace KeyRegisterApp
             public LoanUniquenessException() : base() { }
             public LoanUniquenessException(string message) : base(message) { }
         }
+        public class DependencyException : System.Exception
+        {
+            public DependencyException() : base() { }
+            public DependencyException(string message) : base(message) { }
+        }
     }
 }
