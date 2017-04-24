@@ -74,3 +74,6 @@
 * [Tehtävä 4](src/h10/h10t04/)
 * [Tehtävä 5](src/h10/h10t05/)
 * [Tehtävä 6](src/h10/h10t06/)
+
+##  [Harjoitustyö](src/harjoitustyo/)
+
